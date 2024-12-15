@@ -4,11 +4,15 @@
 #include <time.h>
 #include <limits.h>
 
-
+//makes a random move
 void makeRandomMove() {
     srand(time(NULL)); // инициализация генератора случайных чисел
 
+<<<<<<< Updated upstream
     // Пробуем сделать случайный ход, пока не найдем допустимый
+=======
+    
+>>>>>>> Stashed changes
     int fromX, fromY, toX, toY;
     bool moveMade = false;
 
