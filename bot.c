@@ -8,7 +8,7 @@
 void makeRandomMove() {
     srand(time(NULL)); // инициализация генератора случайных чисел
 
-    // Пробуем сделать случайный ход, пока не найдем допустимый
+
     int fromX, fromY, toX, toY;
     bool moveMade = false;
 
