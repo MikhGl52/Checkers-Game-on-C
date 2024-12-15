@@ -8,7 +8,7 @@
 // d
 int evaluatePosition() {
     int score = 0;
-    // ������ ������ �������: ���������� ����� �� �����
+    //
     for (int y = 0; y < numRows; y++) {
         for (int x = 0; x < numCols; x++) {
             if (field[y][x].checker == black) {
@@ -22,7 +22,7 @@ int evaluatePosition() {
     return score;
 }
 
-// ����������� ������� ��� ������ ���������� ���� � �������������� ��������� ��������
+// 
 int minimax(int depth, int alpha, int beta, bool maximizingPlayer) {
     if (depth == 0 || HasValidCaptures() == false) {
         return evaluatePosition();
@@ -38,7 +38,7 @@ int minimax(int depth, int alpha, int beta, bool maximizingPlayer) {
                             if (IsValidMove(fromX, fromY, toX, toY) || IsValidCapture(fromX, fromY, toX, toY)) {
                                 MoveChecker(fromX, fromY, toX, toY);
                                 int eval = minimax(depth - 1, alpha, beta, false);
-                                MoveChecker(toX, toY, fromX, fromY); // ���������� ����� �����
+                                MoveChecker(toX, toY, fromX, fromY); 
                                 maxEval = std::max(eval, maxEval);
                                 alpha = std::max(alpha, eval);
                                 if (beta <= alpha) {
@@ -62,7 +62,7 @@ int minimax(int depth, int alpha, int beta, bool maximizingPlayer) {
                             if (IsValidMove(fromX, fromY, toX, toY) || IsValidCapture(fromX, fromY, toX, toY)) {
                                 MoveChecker(fromX, fromY, toX, toY);
                                 int eval = minimax(depth - 1, alpha, beta, true);
-                                MoveChecker(toX, toY, fromX, fromY); // ���������� ����� �����
+                                MoveChecker(toX, toY, fromX, fromY); 
                                 minEval = std::min(eval, minEval);
                                 beta = std::min(beta, eval);
                                 if (beta <= alpha) {
