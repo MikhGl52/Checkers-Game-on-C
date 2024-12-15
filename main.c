@@ -446,9 +446,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     // Initialize GLUT
 
-    
-    
-
 
     WNDCLASSEX wcex;
     HWND hwnd;
