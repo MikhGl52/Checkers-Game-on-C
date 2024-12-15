@@ -1,0 +1,8 @@
+﻿  bot.c
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: APIENTRY: изменение макроопределения
+  (компиляция исходного файла "bot.c")
+      C:\Users\mishk\Documents\Visual Studio 2022\libraries\glfw-3.4.bin.WIN64\include\GLFW\glfw3.h(123,11):
+      см. предыдущее определение "APIENTRY"
+  
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(52,11): warning C4101: temp: неиспользованная локальная переменная
+  Checkers for windows.vcxproj -> C:\Users\mishk\source\repos\Checkers for windows\x64\Debug\Checkers for windows.exe
