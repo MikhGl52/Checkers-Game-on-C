@@ -5,7 +5,7 @@
 #include <time.h>
 #include <limits.h>
 
-// 7u
+// 
 int evaluatePosition() {
     int score = 0;
     // ������ ������ �������: ���������� ����� �� �����
