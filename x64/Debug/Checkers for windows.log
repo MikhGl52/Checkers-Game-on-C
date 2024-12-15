@@ -24,4 +24,6 @@ C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(471
 C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(480,9): warning C4133: функция: несовместимые типы - из "char [9]" в "LPCWSTR"
 C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(481,9): warning C4133: функция: несовместимые типы - из "char [1]" в "LPCWSTR"
 C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(559,15): warning C4244: return: преобразование "WPARAM" в "int", возможна потеря данных
-  Checkers for windows.vcxproj -> C:\Users\mishk\source\repos\Checkers for windows\x64\Debug\Checkers for windows.exe
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ MakeBestMove в функции WinMain.
+C:\Users\mishk\Documents\Visual Studio 2022\libraries\freeglut\lib\freeglut.lib : warning LNK4272: тип компьютера библиотеки "x86" конфликтует с типом целевого компьютера "x64"
+C:\Users\mishk\source\repos\Checkers for windows\x64\Debug\Checkers for windows.exe : fatal error LNK1120: неразрешенных внешних элементов: 1
