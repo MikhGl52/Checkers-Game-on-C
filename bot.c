@@ -1,98 +1,75 @@
-
 #include "bot.h"
 #include "main.h"
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
 
-// d
-int evaluatePosition() {
-    int score = 0;
-    //
-    for (int y = 0; y < numRows; y++) {
-        for (int x = 0; x < numCols; x++) {
-            if (field[y][x].checker == black) {
-                score += 1;
+
+void makeRandomMove() {
+    srand(time(NULL)); // инициализация генератора случайных чисел
+
+    // Пробуем сделать случайный ход, пока не найдем допустимый
+    int fromX, fromY, toX, toY;
+    bool moveMade = false;
+
+    while (!moveMade) {
+        fromX = rand() % numCols;
+        fromY = rand() % numRows;
+        toX = rand() % numCols;
+        toY = rand() % numRows;
+
+        if (field[fromY][fromX].checker == black) {
+            if (IsValidMove(fromX, fromY, toX, toY)) {
+                MoveChecker(fromX, fromY, toX, toY);
+                moveMade = true;
+                printf("Random move: (%d, %d) to (%d, %d)\n", fromX, fromY, toX, toY);
             }
-            else if (field[y][x].checker == white) {
-                score -= 1;
+            else if (IsValidCapture(fromX, fromY, toX, toY)) {
+                MoveChecker(fromX, fromY, toX, toY);
+                moveMade = true;
+                printf("Random capture: (%d, %d) to (%d, %d)\n", fromX, fromY, toX, toY);
             }
         }
     }
-    return score;
 }
 
-// 
-int minimax(int depth, int alpha, int beta, bool maximizingPlayer) {
-    if (depth == 0 || HasValidCaptures() == false) {
-        return evaluatePosition();
-    }
-
-    if (maximizingPlayer) {
-        int maxEval = INT_MIN;
-        for (int fromY = 0; fromY < numRows; fromY++) {
-            for (int fromX = 0; fromX < numCols; fromX++) {
-                if (field[fromY][fromX].checker == black) {
-                    for (int toY = 0; toY < numRows; toY++) {
-                        for (int toX = 0; toX < numCols; toX++) {
-                            if (IsValidMove(fromX, fromY, toX, toY) || IsValidCapture(fromX, fromY, toX, toY)) {
-                                MoveChecker(fromX, fromY, toX, toY);
-                                int eval = minimax(depth - 1, alpha, beta, false);
-                                MoveChecker(toX, toY, fromX, fromY); 
-                                maxEval = std::max(eval, maxEval);
-                                alpha = std::max(alpha, eval);
-                                if (beta <= alpha) {
-                                    return maxEval;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return maxEval;
-    }
-    else {
-        int minEval = INT_MAX;
-        for (int fromY = 0; fromY < numRows; fromY++) {
-            for (int fromX = 0; fromX < numCols; fromX++) {
-                if (field[fromY][fromX].checker == white) {
-                    for (int toY = 0; toY < numRows; toY++) {
-                        for (int toX = 0; toX < numCols; toX++) {
-                            if (IsValidMove(fromX, fromY, toX, toY) || IsValidCapture(fromX, fromY, toX, toY)) {
-                                MoveChecker(fromX, fromY, toX, toY);
-                                int eval = minimax(depth - 1, alpha, beta, true);
-                                MoveChecker(toX, toY, fromX, fromY); 
-                                minEval = std::min(eval, minEval);
-                                beta = std::min(beta, eval);
-                                if (beta <= alpha) {
-                                    return minEval;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return minEval;
-    }
-}
 
 void MakeBotMove() {
+    srand(time(NULL));
+
     int bestFromX = -1, bestFromY = -1, bestToX = -1, bestToY = -1;
     int bestScore = INT_MIN;
     bool mustCapture = HasValidCaptures();
-
 
     for (int fromY = 0; fromY < numRows; fromY++) {
         for (int fromX = 0; fromX < numCols; fromX++) {
             if (field[fromY][fromX].checker == black) {
                 for (int toY = 0; toY < numRows; toY++) {
                     for (int toX = 0; toX < numCols; toX++) {
-                        if (IsValidMove(fromX, fromY, toX, toY) || IsValidCapture(fromX, fromY, toX, toY)) {
-                            MoveChecker(fromX, fromY, toX, toY);
-                            int score = minimax(3, INT_MIN, INT_MAX, false); // ������� ������ 3
-                            MoveChecker(toX, toY, fromX, fromY); // ���������� ����� �����
+                        int score = 0; // Инициализация переменной score
+                        if (mustCapture && IsValidCapture(fromX, fromY, toX, toY)) {
+                            score = 100; // Захват шашки даёт +100 очков
+                            printf("Capture move: (%d, %d) to (%d, %d) with score %d\n", fromX, fromY, toX, toY, score);
+                            if (score > bestScore) {
+                                bestScore = score;
+                                bestFromX = fromX;
+                                bestFromY = fromY;
+                                bestToX = toX;
+                                bestToY = toY;
+                            }
+                        }
+                        else if (!mustCapture && IsValidMove(fromX, fromY, toX, toY)) {
+                            score += 1; // Обычный ход даёт +1 очко
+                            if ((player == black && toY == 0) || (player == white && toY == numRows - 1)) {
+                                score = 5; // Движение в сторону дамки даёт +5 очков
+                            }
+                            if (WouldBeUnderThreatAfterMove(fromX, fromY, toX, toY)) {
+                                score = -10; // Если шашка окажется под угрозой, -10 очков
+                            }
+                            else if (OpponentUnderThreat(toX, toY) && !WouldBeUnderThreatAfterMove(fromX, fromY, toX, toY)) {
+                                score = 10; // Если шашка соперника окажется под угрозой, +10 очков
+                            }
+                            //printf("Move: (%d, %d) to (%d, %d) with score %d\n", fromX, fromY, toX, toY, score);
                             if (score > bestScore) {
                                 bestScore = score;
                                 bestFromX = fromX;
@@ -107,29 +84,58 @@ void MakeBotMove() {
         }
     }
 
-    if (bestFromX != -1 && bestFromY != -1 && bestToX != -1 && bestToY != -1) {
-        MoveChecker(bestFromX, bestFromY, bestToX, bestToY);
-        printf("Bot move: (%d, %d) to (%d, %d) with score %d\n", bestFromX, bestFromY, bestToX, bestToY, bestScore);
+    if (bestScore <= 1) {
+        makeRandomMove(); // Выполняем случайный ход, если все ходы имеют низкий приоритет
     }
     else {
-        makeRandomMove(); // ���� �� ������ ������ ���, ������ ��������� ���
+        if (bestFromX != -1 && bestFromY != -1 && bestToX != -1 && bestToY != -1) {
+            bool captured = MoveChecker(bestFromX, bestFromY, bestToX, bestToY);
+            printf("Bot move priority: %d\n", bestScore); // Вывод приоритета хода
+
+
+            while (captured && HasValidCapturesFrom(bestToX, bestToY)) {
+                int nextFromX = bestToX;
+                int nextFromY = bestToY;
+                bestScore = INT_MIN;
+                for (int toY = 0; toY < numRows; toY++) {
+                    for (int toX = 0; toX < numCols; toX++) {
+                        if (IsValidCapture(nextFromX, nextFromY, toX, toY)) {
+                            int score = 100;
+                            if (score > bestScore) {
+                                bestScore = score;
+                                bestFromX = nextFromX;
+                                bestFromY = nextFromY;
+                                bestToX = toX;
+                                bestToY = toY;
+                            }
+                        }
+                    }
+                }
+                captured = MoveChecker(bestFromX, bestFromY, bestToX, bestToY);
+                printf("Bot move priority: %d\n", bestScore); // Вывод приоритета хода
+            }
+
+            if (!captured || !HasValidCapturesFrom(bestToX, bestToY)) {
+                player = white; // Переключаем ход к белым
+            }
+        }
     }
 }
 
-// ������� ���������, �������� �� ����� ��� ������� ����� ���������� ����
+
+
+
+
 BOOL WouldBeUnderThreatAfterMove(int fromX, int fromY, int toX, int toY) {
     int tempChecker = field[toY][toX].checker;
     bool tempQueen = field[toY][toX].queen;
-    // ���������� �����
     field[toY][toX].checker = field[fromY][fromX].checker;
     field[toY][toX].queen = field[fromY][fromX].queen;
     field[fromY][fromX].checker = empty;
     field[fromY][fromX].queen = false;
 
-    // ���������, ����� �� ����� ��� �������
     BOOL underThreat = WouldBeUnderThreat(toX, toY);
 
-    // ���������� ���� � �������� ���������
     field[fromY][fromX].checker = field[toY][toX].checker;
     field[fromY][fromX].queen = field[toY][toX].queen;
     field[toY][toX].checker = tempChecker;
@@ -138,7 +144,6 @@ BOOL WouldBeUnderThreatAfterMove(int fromX, int fromY, int toX, int toY) {
     return underThreat;
 }
 
-// ���������, ��������� �� ����� ��� ������� �� ����������
 BOOL WouldBeUnderThreat(int x, int y) {
     int enemy = (player == white) ? black : white;
 
@@ -160,7 +165,8 @@ BOOL WouldBeUnderThreat(int x, int y) {
     return false;
 }
 
-// ���������, ��������� �� ����� ���������� ��� �������
+
+
 BOOL OpponentUnderThreat(int x, int y) {
     int enemy = (player == white) ? black : white;
 

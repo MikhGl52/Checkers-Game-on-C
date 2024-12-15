@@ -1,8 +1,29 @@
-﻿  bot.c
+﻿  main.c
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: APIENTRY: изменение макроопределения
-  (компиляция исходного файла "bot.c")
+  (компиляция исходного файла "main.c")
       C:\Users\mishk\Documents\Visual Studio 2022\libraries\glfw-3.4.bin.WIN64\include\GLFW\glfw3.h(123,11):
       см. предыдущее определение "APIENTRY"
   
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(52,11): warning C4101: temp: неиспользованная локальная переменная
-  Checkers for windows.vcxproj -> C:\Users\mishk\source\repos\Checkers for windows\x64\Debug\Checkers for windows.exe
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(100,19): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(100,27): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(100,33): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(107,28): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(108,28): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(117,19): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(117,25): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(117,31): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(95,15): warning C4305: инициализация: усечение из "double" в "float"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(96,24): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(215,18): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(215,33): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(221,26): warning C4244: функция: преобразование "int" в "GLfloat", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(221,29): warning C4244: функция: преобразование "int" в "GLfloat", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(252,10): warning C4013: HasValidCaptures: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(395,55): warning C4013: HasValidCapturesFrom: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(471,24): warning C4133: =: несовместимые типы - из "char [9]" в "LPCWSTR"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(480,9): warning C4133: функция: несовместимые типы - из "char [9]" в "LPCWSTR"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(481,9): warning C4133: функция: несовместимые типы - из "char [1]" в "LPCWSTR"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(559,15): warning C4244: return: преобразование "WPARAM" в "int", возможна потеря данных
+main.obj : error LNK2019: ссылка на неразрешенный внешний символ MakeBestMove в функции WinMain.
+C:\Users\mishk\Documents\Visual Studio 2022\libraries\freeglut\lib\freeglut.lib : warning LNK4272: тип компьютера библиотеки "x86" конфликтует с типом целевого компьютера "x64"
+C:\Users\mishk\source\repos\Checkers for windows\x64\Debug\Checkers for windows.exe : fatal error LNK1120: неразрешенных внешних элементов: 1
