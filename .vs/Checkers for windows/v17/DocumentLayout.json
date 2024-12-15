@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\mishk\\source\\repos\\Checkers for windows\\Checkers for windows\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mishk\\source\\repos\\Checkers for windows\\Checkers for windows\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mishk\\source\\repos\\Checkers for windows\\Checkers for windows\\bot.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:bot.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -19,12 +23,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "main.c",
+              "DocumentMoniker": "C:\\Users\\mishk\\source\\repos\\Checkers for windows\\Checkers for windows\\main.c",
+              "RelativeDocumentMoniker": "main.c",
+              "ToolTip": "C:\\Users\\mishk\\source\\repos\\Checkers for windows\\Checkers for windows\\main.c",
+              "RelativeToolTip": "main.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-12-15T17:15:02.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "bot.c",
               "DocumentMoniker": "C:\\Users\\mishk\\source\\repos\\Checkers for windows\\Checkers for windows\\bot.c",
               "RelativeDocumentMoniker": "bot.c",
               "ToolTip": "C:\\Users\\mishk\\source\\repos\\Checkers for windows\\Checkers for windows\\bot.c",
               "RelativeToolTip": "bot.c",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAEAAAABFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-12-15T17:07:38.516Z",
               "EditorCaption": ""
