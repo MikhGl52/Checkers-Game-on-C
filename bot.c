@@ -9,7 +9,11 @@ void makeRandomMove() {
     srand(time(NULL)); // инициализация генератора случайных чисел
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // Пробуем сделать случайный ход, пока не найдем допустимый
+=======
+    
+>>>>>>> Stashed changes
 =======
     
 >>>>>>> Stashed changes
