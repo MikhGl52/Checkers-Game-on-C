@@ -538,7 +538,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
             if (!PvP && !inMenu) {
                 if (player == black) {
-                    MakeBestMove();
+                    MakeBotMove();
                     player = white;
                     if (GameOver()) {
                         PostQuitMessage(0);
