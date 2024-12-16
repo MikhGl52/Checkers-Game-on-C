@@ -402,7 +402,6 @@ bool MoveChecker(int fromX, int fromY, int toX, int toY) {
 }
 
 
-
 BOOL HasValidCapturesFrom(int x, int y) {
     if (!field[y][x].queen) { // Проверка для обычных шашек
         return IsValidCapture(x, y, x + 2, y + 2) ||
