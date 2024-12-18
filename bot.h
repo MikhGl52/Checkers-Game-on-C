@@ -2,7 +2,7 @@
 #ifndef BOT_H
 #define BOT_H
 
-void MakeBestMove();
+void MakeBotMove();
 
 
 #endif // BOT_H

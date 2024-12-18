@@ -33,10 +33,37 @@ void makeRandomMove() {
     }
 }
 
+void makeNonCaptureRandomMove() {
+    srand(time(NULL)); // инициализация генератора случайных чисел
+
+
+    int fromX, fromY, toX, toY;
+    bool moveMade = false;
+
+    while (!moveMade) {
+        fromX = rand() % numCols;
+        fromY = rand() % numRows;
+        toX = rand() % numCols;
+        toY = rand() % numRows;
+
+        if (field[fromY][fromX].checker == black) {
+            if (IsValidMove(fromX, fromY, toX, toY) && !WouldBeUnderThreatAfterMove (fromX, fromY, toX, toY)) {
+                MoveChecker(fromX, fromY, toX, toY);
+                moveMade = true;
+                printf("Random move: (%d, %d) to (%d, %d)\n", fromX, fromY, toX, toY);
+            }
+            else if (IsValidCapture(fromX, fromY, toX, toY)) {
+                MoveChecker(fromX, fromY, toX, toY);
+                moveMade = true;
+                printf("Random capture: (%d, %d) to (%d, %d)\n", fromX, fromY, toX, toY);
+            }
+        }
+    }
+}
 
 void MakeBotMove() {
     srand(time(NULL));
-
+    int score;
     int bestFromX = -1, bestFromY = -1, bestToX = -1, bestToY = -1;
     int bestScore = INT_MIN;
     bool mustCapture = HasValidCaptures();
@@ -46,7 +73,7 @@ void MakeBotMove() {
             if (field[fromY][fromX].checker == black) {
                 for (int toY = 0; toY < numRows; toY++) {
                     for (int toX = 0; toX < numCols; toX++) {
-                        int score = 0; // Инициализация переменной score
+                        score = 0; // Инициализация переменной score
                         if (mustCapture && IsValidCapture(fromX, fromY, toX, toY)) {
                             score = 100; // Захват шашки даёт +100 очков
                             printf("Capture move: (%d, %d) to (%d, %d) with score %d\n", fromX, fromY, toX, toY, score);
@@ -69,7 +96,7 @@ void MakeBotMove() {
                             else if (OpponentUnderThreat(toX, toY) && !WouldBeUnderThreatAfterMove(fromX, fromY, toX, toY)) {
                                 score = 10; // Если шашка соперника окажется под угрозой, +10 очков
                             }
-                            //printf("Move: (%d, %d) to (%d, %d) with score %d\n", fromX, fromY, toX, toY, score);
+                            if (score != 0) printf("Move: (%d, %d) to (%d, %d) with score %d\n", fromX, fromY, toX, toY, score);
                             if (score > bestScore) {
                                 bestScore = score;
                                 bestFromX = fromX;
@@ -83,9 +110,11 @@ void MakeBotMove() {
             }
         }
     }
-
+    printf("best score %d\n", bestScore);
     if (bestScore <= 1) {
-        makeRandomMove(); // Выполняем случайный ход, если все ходы имеют низкий приоритет
+        //if (bestScore == 1) makeNonCaptureRandomMove;
+        //else makeRandomMove(); // Выполняем случайный ход, если все ходы имеют низкий приоритет
+        makeRandomMove();
     }
     else {
         if (bestFromX != -1 && bestFromY != -1 && bestToX != -1 && bestToY != -1) {
