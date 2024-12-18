@@ -30,7 +30,7 @@ typedef enum {
 } Color;
 
 typedef struct {
-    int checker; // 0 - empty, 1 - white, 2 - black
+    int checker; // 0 - empty, 1 - black, 2 - white
     int color;   // 1 - white, 2 - black
     bool queen;
     bool border;
@@ -231,6 +231,7 @@ void ShowGame() {
 
             glPopMatrix();
         }
+
     }
 
 }
@@ -497,6 +498,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     NewGame();
     printf("%dx%d\n", whiteAmount, blackAmount);
 
+
+
     /* program main loop */
     while (!bQuit) {
         /* check for messages */
@@ -580,7 +583,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
         ScreenToOpenGL(hwnd, LOWORD(lParam), HIWORD(lParam), &pf.x, &pf.y);
         int x = (int)pf.x;
         int y = (int)pf.y;
-
         if (inMenu) {
             HandleButtonClick(x, y);
             inMenu = false;

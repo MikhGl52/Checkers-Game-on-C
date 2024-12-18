@@ -4,10 +4,11 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(1
       C:\Users\mishk\Documents\Visual Studio 2022\libraries\glfw-3.4.bin.WIN64\include\GLFW\glfw3.h(123,11):
       см. предыдущее определение "APIENTRY"
   
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(9,11): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(37,11): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(50,57): warning C4013: WouldBeUnderThreatAfterMove: нет определения; предполагается "extern" с возвратом типа "int"
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(65,11): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(96,38): warning C4013: OpponentUnderThreat: нет определения; предполагается "extern" с возвратом типа "int"
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(166,24): warning C4013: WouldBeUnderThreat: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(29,13): warning C4013: WouldBeUnderThreatAfterMove: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(32,13): warning C4013: OpponentUnderThreatAfterMove: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(44,11): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(83,11): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(84,9): warning C4101: score: неиспользованная локальная переменная
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(156,24): warning C4013: WouldBeUnderThreat: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(199,24): warning C4013: OpponentUnderThreat: нет определения; предполагается "extern" с возвратом типа "int"
   Checkers for windows.vcxproj -> C:\Users\mishk\source\repos\Checkers for windows\x64\Debug\Checkers for windows.exe
