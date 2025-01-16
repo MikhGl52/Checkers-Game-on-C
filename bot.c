@@ -3,41 +3,16 @@
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
+#include "evaluate.h"
 
 #define MAX_MOVES 100 // Максимальное количество возможных ходов
+#define MAX_DEPTH 5
+
 
 typedef struct {
     int fromX, fromY;
     int toX, toY;
 } Move;
-
-int EvaluateMove(int fromX, int fromY, int toX, int toY, bool mustCapture) {
-    int score = 0;
-
-    // Высокий приоритет для захватов
-    if (mustCapture && IsValidCapture(fromX, fromY, toX, toY)) {
-        return 100; // Захват даёт высокий приоритет
-    }
-
-    if (!mustCapture && IsValidMove(fromX, fromY, toX, toY)) {
-        score += 1; // Базовый ход
-
-        // Движение к дамке
-        if ((player == black && toY == 0) || (player == white && toY == numRows - 1))
-            score += 5;
-
-        if (WouldBeUnderThreatAfterMove(fromX, fromY, toX, toY))
-            score -= 10;
-
-        if (OpponentUnderThreatAfterMove(fromX, fromY, toX, toY) &&
-            !WouldBeUnderThreatAfterMove(fromX, fromY, toX, toY))
-            score += 10;
-
-    }
-
-    return score;
-}
-
 
 
 void makeRandomMove(int best) {
@@ -76,7 +51,6 @@ void makeRandomMove(int best) {
         }
     }
 }
-
 
 
 void MakeBotMove() {
@@ -226,3 +200,4 @@ BOOL OpponentUnderThreat(int x, int y) {
     }
     return false;
 }
+
