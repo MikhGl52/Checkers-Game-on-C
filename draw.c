@@ -8,6 +8,7 @@
 #include <GL\freeglut.h>
 #include "bot.h"
 #include "main.h"
+#include <GL/glut.h>
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
 
 void drawChecker(int color, bool queen) {
@@ -54,20 +55,39 @@ void drawChecker(int color, bool queen) {
 
 }
 
+//void drawText(float x, float y, const char* text) {
+//    glRasterPos2f(x, y); // Устанавливаем позицию текста
+//    for (const char* c = text; *c != '\0'; c++) {
+//        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
+//    }
+//}
 
 void drawWinScreen() {
-    glClear(GL_COLOR_BUFFER_BIT); // Очистка экрана (если необходимо)
+    glMatrixMode(GL_PROJECTION);  // Переход к матрице проекции
+    glLoadIdentity();            // Сброс матрицы
+    gluOrtho2D(0.0, 1.0, 0.0, 1.0);  // Устанавливаем координаты от 0 до 1
 
-    glColor3f(0.0f, 1.0f, 0.0f);  // Зеленый цвет
+    glMatrixMode(GL_MODELVIEW);  // Переход к матрице вида
+    glLoadIdentity();            // Сброс матрицы
+
+    glClear(GL_COLOR_BUFFER_BIT); // Очистка экрана
+
+    // Рисуем красный квадрат на весь экран
     glBegin(GL_QUADS);
-    glVertex2f(0.0f, 0.0f);   // Нижний левый угол
-    glVertex2f(0.0f, 1.0f);   // Верхний левый угол
-    glVertex2f(1.0f, 1.0f);   // Верхний правый угол
-    glVertex2f(1.0f, 0.0f);   // Нижний правый угол
+    glColor3f(1.0f, 0.0f, 0.0f); // Красный цвет
+    glVertex2f(0, 0);
+    glVertex2f(0, 1);
+    glVertex2f(1, 1);
+    glVertex2f(1, 0);
     glEnd();
 
-    glFlush(); // Применить изменения
+    //// Рисуем текст
+    //glColor3f(1.0, 1.0, 1.0); // Белый цвет текста
+    //drawText(0.4f, 0.5f, "Hello, OpenGL!"); // Позиция текста (x, y)
+
+    glFlush(); // Применяем изменения
 }
+
 
 
 void drawSquare(int color) {
@@ -94,9 +114,3 @@ void drawRSquare() {
     glEnd();
 }
 
-void drawText(float x, float y, char* text) {
-    glRasterPos2f(x, y);
-    for (int i = 0; text[i] != '\0'; i++) {
-        //glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, text[i]);
-    }
-}

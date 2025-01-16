@@ -15,7 +15,4 @@ void drawSquare(int color);
 // Функция рисования выделенного квадрата
 void drawRSquare();
 
-// Функция для вывода текста на экран
-void drawText(float x, float y, char* text);
-
 #endif // DRAW_H

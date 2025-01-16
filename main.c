@@ -18,6 +18,7 @@ bool PvP = false;
 bool inMenu = false;
 bool winner;
 
+bool ended = false;
 
 // Глобальные переменные для хранения размера окна
 int windowWidth = 1000;
@@ -76,47 +77,49 @@ void ScreenToOpenGL(HWND hwnd, int x, int y, float* ox, float* oy) {
 }
 
 
-BOOL PointInButton(int x, int y, Button btn) {
-    return (x > btn.vert[0]) && (x < btn.vert[4]) && (y > btn.vert[1]) && (y < btn.vert[5]);
-}
-
-Button startBtn = { "start",{0,0,100,0,100,30,0,30}, "Start Game" };
-Button pvpBtn = { "pvp",{110,0,210,0,210,30,110,30}, "PvP Mode" };
 
 
-
-void Button_Show(Button btn) {
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glColor3f(1, 1, 0);
-    glVertexPointer(2, GL_FLOAT, 0, btn.vert);
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-    glDisableClientState(GL_VERTEX_ARRAY);
-
-    // Отрисовка текста на кнопке
-    drawText(btn.vert[0] + 10, btn.vert[1] + 20, btn.text);
-}
-
-
-void HandleButtonClick(int x, int y) {
-    if (PointInButton(x, y, startBtn)) {
-        inMenu = false;
-        printf("Start button clicked\n");
-        // Начать новую игру
-        NewGame();
-    }
-    else if (PointInButton(x, y, pvpBtn)) {
-        PvP = !PvP;
-        printf("PvP button clicked. PvP is now %s\n", PvP ? "on" : "off");
-    }
-}
+//BOOL PointInButton(int x, int y, Button btn) {
+//    return (x > btn.vert[0]) && (x < btn.vert[4]) && (y > btn.vert[1]) && (y < btn.vert[5]);
+//}
+//
+//Button startBtn = { "start",{0,0,100,0,100,30,0,30}, "Start Game" };
+//Button pvpBtn = { "pvp",{110,0,210,0,210,30,110,30}, "PvP Mode" };
+//
+//
+//
+//void Button_Show(Button btn) {
+//    glEnableClientState(GL_VERTEX_ARRAY);
+//    glColor3f(1, 1, 0);
+//    glVertexPointer(2, GL_FLOAT, 0, btn.vert);
+//    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+//    glDisableClientState(GL_VERTEX_ARRAY);
+//
+//    // Отрисовка текста на кнопке
+//    drawText(btn.vert[0] + 10, btn.vert[1] + 20, btn.text);
+//}
+//
+//
+//void HandleButtonClick(int x, int y) {
+//    if (PointInButton(x, y, startBtn)) {
+//        inMenu = false;
+//        printf("Start button clicked\n");
+//        // Начать новую игру
+//        NewGame();
+//    }
+//    else if (PointInButton(x, y, pvpBtn)) {
+//        PvP = !PvP;
+//        printf("PvP button clicked. PvP is now %s\n", PvP ? "on" : "off");
+//    }
+//}
 
 void ShowMenu() {
     glPushMatrix();
     glLoadIdentity();
     glOrtho(0, windowWidth, windowHeight, 0, -1, 1);
 
-    Button_Show(startBtn);
-    Button_Show(pvpBtn);
+    /*Button_Show(startBtn);
+    Button_Show(pvpBtn);*/
 
     glPopMatrix();
 }
@@ -145,7 +148,7 @@ void ShowGame() {
         }
 
     }
-
+    glLoadIdentity();
 }
 
 
@@ -223,7 +226,6 @@ bool IsValidCapture(int fromX, int fromY, int toX, int toY) {
 
     return false;
 }
-
 
 
 bool HasValidCaptures() {
@@ -336,11 +338,13 @@ bool GameOver(bool* winner) {
     if (whiteAmount == 0) {
         printf("Black wins!\n");
         *winner = false;
+        ended = true;
         return true;
     }
     else if (blackAmount == 0) {
         printf("White wins!\n");
         *winner = true;
+        ended = true;
         return true;
     }
     return false;
@@ -442,8 +446,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
                 ShowGame();
             }*/
 
-
-            ShowGame();
+            if (ended == false)
+                ShowGame();
+            else drawWinScreen(winner);
 
             glPopMatrix();
             SwapBuffers(hDC);
@@ -498,14 +503,15 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
         int x = (int)pf.x;
         int y = (int)pf.y;
         if (inMenu) {
-            HandleButtonClick(x, y);
-            inMenu = false;
+            /*HandleButtonClick(x, y);
+            inMenu = false;*/
         }
         else {
             if (InMap(x, y)) {
                 bool mustCapture = HasValidCaptures();
 
                 if (isCheckerSelected) {
+                    
                     if (IsValidCapture(selectedChecker.x, selectedChecker.y, x, y) || (!mustCapture && IsValidMove(selectedChecker.x, selectedChecker.y, x, y))) {
                         bool captured = MoveChecker(selectedChecker.x, selectedChecker.y, x, y);
                         if (captured) {
@@ -542,6 +548,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 
                     // Проверка окончания игры
                     if (GameOver(winner)) {
+                        Sleep(2);
                         drawWinScreen();
                         Sleep(2);
                     }

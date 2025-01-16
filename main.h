@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <stdbool.h>
 #include <math.h>
+#include <GL\freeglut.h>
 #include <stdlib.h>
 #include <stdio.h> 
 
@@ -37,7 +38,7 @@ void ScreenToOpenGL(HWND hwnd, int x, int y, float* ox, float* oy);
 void drawChecker(int color, bool queen);
 void drawSquare(int color);
 void drawRSquare();
-void ShowGame();
+void drawText(float x, float y, const char* text);void ShowGame();
 void NewGame();
 int InMap(int x, int y);
 bool IsValidMove(int fromX, int fromY, int toX, int toY);
