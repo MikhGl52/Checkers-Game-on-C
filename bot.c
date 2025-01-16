@@ -16,7 +16,6 @@ typedef struct {
 
 
 void makeRandomMove(int best) {
-    srand(time(NULL)); // инициализация генератора случайных чисел
 
 
     int fromX, fromY, toX, toY;
