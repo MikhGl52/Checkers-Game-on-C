@@ -9,7 +9,6 @@
 #include "bot.h"
 #include "main.h"
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
-#define M_PI 3.14159265358979323846  /* pi */
 
 void drawChecker(int color, bool queen) {
     float x, y;

@@ -3,14 +3,14 @@
 #include <GLFW/glfw3.h>
 #include <windows.h>
 #include <stdbool.h>
-#include <time.h>А
+#include <time.h>
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>  
 #include <GL\freeglut.h>
 #include "bot.h"
 #include "draw.h"
-
+#include "main.h"
 
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
 
@@ -18,35 +18,17 @@ bool PvP = false;
 bool inMenu = false;
 bool winner;
 
-#define M_PI 3.14159265358979323846  /* pi */
-#define numRows 10 //W
-#define numCols 10 //H
 
 // Глобальные переменные для хранения размера окна
 int windowWidth = 1000;
 int windowHeight = 1000;
 float cellSize = 1.0f / numRows;
 
-typedef enum {
-    empty,
-    white,
-    black
-} Color;
-
-typedef struct {
-    int checker; // 0 - empty, 1 - black, 2 - white
-    int color;   // 1 - white, 2 - black
-    bool queen;
-    bool border;
-    int selected;
-} Tcell;
-
 typedef struct {
     char name[20];
     float vert[8];
     char text[20];
 } Button;
-
 
 
 Tcell field[numRows][numCols];
@@ -244,7 +226,7 @@ bool IsValidCapture(int fromX, int fromY, int toX, int toY) {
 
 
 
-BOOL HasValidCaptures() {
+bool HasValidCaptures() {
     for (int i = 0; i < numRows; i++) {
         for (int j = 0; j < numCols; j++) {
             if (field[i][j].checker == player) {
@@ -331,7 +313,7 @@ bool MoveChecker(int fromX, int fromY, int toX, int toY) {
 }
 
 
-BOOL HasValidCapturesFrom(int x, int y) {
+bool HasValidCapturesFrom(int x, int y) {
     if (!field[y][x].queen) { // Проверка для обычных шашек
         return IsValidCapture(x, y, x + 2, y + 2) ||
             IsValidCapture(x, y, x + 2, y - 2) ||

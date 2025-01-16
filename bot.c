@@ -17,7 +17,6 @@ typedef struct {
 
 void makeRandomMove(int best) {
 
-
     int fromX, fromY, toX, toY;
     bool moveMade = false;
 
@@ -116,6 +115,7 @@ void MakeBotMove() {
         }
     }
 }
+
 
 
 BOOL WouldBeUnderThreatAfterMove(int fromX, int fromY, int toX, int toY) {
