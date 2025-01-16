@@ -1,2 +1,41 @@
-﻿  LINK : не найден или не выполнена сборка C:\Users\mishk\source\repos\Checkers for windows\x64\Debug\Checkers for windows.exe при последней инкрементной компоновке; выполняется полная компоновка
+﻿  draw.c
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: APIENTRY: изменение макроопределения
+  (компиляция исходного файла "draw.c")
+      C:\Users\mishk\Documents\Visual Studio 2022\libraries\glfw-3.4.bin.WIN64\include\GLFW\glfw3.h(123,11):
+      см. предыдущее определение "APIENTRY"
+  
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\draw.c(4,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\draw.c(22,19): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\draw.c(22,27): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\draw.c(22,33): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\draw.c(29,28): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\draw.c(30,28): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\draw.c(39,19): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\draw.c(39,25): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\draw.c(39,31): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\draw.c(17,15): warning C4305: инициализация: усечение из "double" в "float"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\draw.c(18,24): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+  main.c
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: APIENTRY: изменение макроопределения
+  (компиляция исходного файла "main.c")
+      C:\Users\mishk\Documents\Visual Studio 2022\libraries\glfw-3.4.bin.WIN64\include\GLFW\glfw3.h(123,11):
+      см. предыдущее определение "APIENTRY"
+  
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(6,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(145,18): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(145,33): warning C4305: функция: усечение из "double" в "GLfloat"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(151,26): warning C4244: функция: преобразование "int" в "GLfloat", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(151,29): warning C4244: функция: преобразование "int" в "GLfloat", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(183,10): warning C4013: HasValidCaptures: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(326,55): warning C4013: HasValidCapturesFrom: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(374,11): warning C4244: функция: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(401,24): warning C4133: =: несовместимые типы - из "char [9]" в "LPCWSTR"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(410,9): warning C4133: функция: несовместимые типы - из "char [9]" в "LPCWSTR"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(411,9): warning C4133: функция: несовместимые типы - из "char [1]" в "LPCWSTR"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(475,34): warning C4047: функция: "bool *" отличается по уровням косвенного обращения от "bool"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(475,34): warning C4024: GameOver: различные типы для формального и фактического параметров 1
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(492,15): warning C4244: return: преобразование "WPARAM" в "int", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(564,34): warning C4047: функция: "bool *" отличается по уровням косвенного обращения от "bool"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(564,34): warning C4024: GameOver: различные типы для формального и фактического параметров 1
+  Создание кода...
   Checkers for windows.vcxproj -> C:\Users\mishk\source\repos\Checkers for windows\x64\Debug\Checkers for windows.exe

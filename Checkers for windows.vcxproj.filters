@@ -33,12 +33,24 @@
     <ClInclude Include="main.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="evaluate.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="draw.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="bot.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="evaluate.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="draw.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

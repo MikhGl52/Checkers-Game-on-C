@@ -135,6 +135,8 @@
   <ItemGroup>
     <ClInclude Include="bot.h" />
     <ClInclude Include="Checkers for windows.h" />
+    <ClInclude Include="draw.h" />
+    <ClInclude Include="evaluate.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Resource.h" />
@@ -142,6 +144,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bot.c" />
+    <ClCompile Include="draw.c" />
+    <ClCompile Include="evaluate.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>

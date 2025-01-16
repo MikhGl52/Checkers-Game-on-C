@@ -54,7 +54,7 @@ void makeRandomMove(int best) {
 
 
 void MakeBotMove() {
-    srand(time(NULL));
+
     int score;
     int bestFromX = -1, bestFromY = -1, bestToX = -1, bestToY = -1;
     int bestScore = INT_MIN;

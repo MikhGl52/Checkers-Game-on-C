@@ -3,16 +3,20 @@
 #include <GLFW/glfw3.h>
 #include <windows.h>
 #include <stdbool.h>
+#include <time.h>А
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>  
 #include <GL\freeglut.h>
 #include "bot.h"
+#include "draw.h"
+
+
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
 
 bool PvP = false;
 bool inMenu = false;
-
+bool winner;
 
 #define M_PI 3.14159265358979323846  /* pi */
 #define numRows 10 //W
@@ -89,75 +93,6 @@ void ScreenToOpenGL(HWND hwnd, int x, int y, float* ox, float* oy) {
     *oy = numRows - (y / (float)rct.bottom) * numRows;
 }
 
-void drawChecker(int color, bool queen) {
-    float x, y;
-    float cnt = 100;
-    float l = 0.45;
-    float a = M_PI * 2 / cnt;
-
-    glBegin(GL_TRIANGLE_FAN);
-    if (color == black) // Черный цвет
-        glColor3f(0.4588, 0.02, 0.02);
-    else if (color == white) // Белый цвет
-        glColor3f(0.99609375, 0.96875, 0.859375);
-
-    glVertex2f(0.5, 0.5); // Центр круга
-
-    for (int i = -1; i < cnt; i++) {
-        x = sin(a * i) * l + 0.5;
-        y = cos(a * i) * l + 0.5;
-        glVertex2f(x, y);
-    }
-
-    glEnd();
-
-    if (queen) {
-        glBegin(GL_TRIANGLES);
-
-        glColor3f(0.51, 0.43, 0.02);
-
-        glVertex2f(0.5, 0.25);
-        glVertex2f(0.25, 0.25);
-        glVertex2f(0.25, 0.75);
-
-        glVertex2f(0.5, 0.25);
-        glVertex2f(0.75, 0.25);
-        glVertex2f(0.75, 0.75);
-
-        glVertex2f(0.375, 0.25);
-        glVertex2f(0.625, 0.25);
-        glVertex2f(0.5, 0.75);
-
-        glEnd();
-    }
-
-}
-
-
-void drawSquare(int color) {
-    if (color == black) // Черный цвет
-        glColor3f(0.0f, 0.0f, 0.0f);
-    else if (color == white) // Белый цвет
-        glColor3f(1.0f, 1.0f, 1.0f);
-
-    glBegin(GL_QUADS);
-    glVertex2f(0, 0);
-    glVertex2f(0, 1);
-    glVertex2f(1, 1);
-    glVertex2f(1, 0);
-    glEnd();
-}
-
-void drawRSquare() {
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glBegin(GL_LINE_STRIP);
-    glVertex2f(0, 0);
-    glVertex2f(0, 1);
-    glVertex2f(1, 1);
-    glVertex2f(1, 0);
-    glEnd();
-}
-
 
 BOOL PointInButton(int x, int y, Button btn) {
     return (x > btn.vert[0]) && (x < btn.vert[4]) && (y > btn.vert[1]) && (y < btn.vert[5]);
@@ -166,12 +101,7 @@ BOOL PointInButton(int x, int y, Button btn) {
 Button startBtn = { "start",{0,0,100,0,100,30,0,30}, "Start Game" };
 Button pvpBtn = { "pvp",{110,0,210,0,210,30,110,30}, "PvP Mode" };
 
-void drawText(float x, float y, char* text) {
-    glRasterPos2f(x, y);
-    for (int i = 0; text[i] != '\0'; i++) {
-        //glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, text[i]);
-    }
-}
+
 
 void Button_Show(Button btn) {
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -235,7 +165,6 @@ void ShowGame() {
     }
 
 }
-
 
 
 // Проверка на то, что координаты находятся в пределах поля
@@ -312,7 +241,6 @@ bool IsValidCapture(int fromX, int fromY, int toX, int toY) {
 
     return false;
 }
-
 
 
 
@@ -422,13 +350,15 @@ BOOL HasValidCapturesFrom(int x, int y) {
     return false;
 }
 
-bool GameOver() {
+bool GameOver(bool* winner) {
     if (whiteAmount == 0) {
         printf("Black wins!\n");
+        *winner = false;
         return true;
     }
     else if (blackAmount == 0) {
         printf("White wins!\n");
+        *winner = true;
         return true;
     }
     return false;
@@ -439,6 +369,7 @@ void EnableOpenGL(HWND hwnd, HDC*, HGLRC*);
 void DisableOpenGL(HWND, HDC, HGLRC);
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+    srand(time(NULL)); // Инициализация генератора случайных чисел
     // Инициализация консоли
     AllocConsole();
     freopen("CONOUT$", "w", stdout);
@@ -539,8 +470,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
                 if (player == black) {
                     MakeBotMove();
                     player = white;
-                    if (GameOver()) {
-                        PostQuitMessage(0);
+                    if (GameOver(winner)) {
+                        drawWinScreen();
+                        Sleep(2);
                     }
                 }
             }
@@ -627,8 +559,11 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
                     }
 
                     // Проверка окончания игры
-                    if (GameOver())
-                        PostQuitMessage(0);
+                    if (GameOver(winner)) {
+                        drawWinScreen();
+                        Sleep(2);
+                    }
+
 
                 }
                 else {
