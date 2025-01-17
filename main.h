@@ -28,6 +28,8 @@ typedef struct {
 } Tcell;
 
 extern Tcell field[numRows][numCols];
+extern bool PvP;
+extern bool inMenu;
 extern int player;
 extern int whiteAmount;
 extern int blackAmount;

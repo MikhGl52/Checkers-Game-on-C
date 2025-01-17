@@ -25,11 +25,7 @@ int windowWidth = 1000;
 int windowHeight = 1000;
 float cellSize = 1.0f / numRows;
 
-typedef struct {
-    char name[20];
-    float vert[8];
-    char text[20];
-} Button;
+
 
 
 Tcell field[numRows][numCols];
