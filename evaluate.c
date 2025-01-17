@@ -8,15 +8,15 @@
 int EvaluateMove(int fromX, int fromY, int toX, int toY, bool mustCapture) {
     int score = 0;
 
-    // Высокий приоритет для захватов
-    if (mustCapture && IsValidCapture(fromX, fromY, toX, toY)) 
-        return 100; // Захват даёт высокий приоритет
-    
+    // 
+    if (mustCapture && IsValidCapture(fromX, fromY, toX, toY))
+        return 100; // 
+
 
     if (!mustCapture && IsValidMove(fromX, fromY, toX, toY)) {
-        score += 1; // Базовый ход
+        score += 1; //
 
-        // Движение к дамке
+        // 
         if ((player == black && toY == 0) || (player == white && toY == numRows - 1))
             score += 5;
 
@@ -31,4 +31,6 @@ int EvaluateMove(int fromX, int fromY, int toX, int toY, bool mustCapture) {
 
     return score;
 }
+
+
 

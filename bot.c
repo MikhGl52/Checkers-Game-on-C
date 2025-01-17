@@ -199,4 +199,3 @@ BOOL OpponentUnderThreat(int x, int y) {
     }
     return false;
 }
-

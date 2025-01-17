@@ -4,6 +4,8 @@
 
 #include <stdbool.h>
 #include <windows.h>
+#include "main.h"
+#include "draw.h"
 
 // Структура кнопки
 typedef struct {

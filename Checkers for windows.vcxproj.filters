@@ -39,6 +39,9 @@
     <ClInclude Include="draw.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -51,6 +54,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="draw.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="button.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

@@ -37,10 +37,7 @@ extern bool isCheckerSelected;
 extern POINT selectedChecker;
 
 void ScreenToOpenGL(HWND hwnd, int x, int y, float* ox, float* oy);
-void drawChecker(int color, bool queen);
-void drawSquare(int color);
-void drawRSquare();
-void drawText(float x, float y, const char* text);void ShowGame();
+void ShowGame();
 void NewGame();
 int InMap(int x, int y);
 bool IsValidMove(int fromX, int fromY, int toX, int toY);
@@ -50,7 +47,7 @@ bool MoveChecker(int fromX, int fromY, int toX, int toY);
 bool HasValidCapturesFrom(int x, int y);
 bool GameOver();
 
-//bool OpponentUnderThreat(int x, int y);  // Добавляем новую функцию
+//bool OpponentUnderThreat(int x, int y);
 
 
 #endif // MAIN_H

@@ -11,6 +11,8 @@
 #include "bot.h"
 #include "draw.h"
 #include "main.h"
+#include "button.h"
+
 
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
 
@@ -24,8 +26,6 @@ bool ended = false;
 int windowWidth = 1000;
 int windowHeight = 1000;
 float cellSize = 1.0f / numRows;
-
-
 
 
 Tcell field[numRows][numCols];
@@ -72,42 +72,6 @@ void ScreenToOpenGL(HWND hwnd, int x, int y, float* ox, float* oy) {
     *oy = numRows - (y / (float)rct.bottom) * numRows;
 }
 
-
-
-
-//BOOL PointInButton(int x, int y, Button btn) {
-//    return (x > btn.vert[0]) && (x < btn.vert[4]) && (y > btn.vert[1]) && (y < btn.vert[5]);
-//}
-//
-//Button startBtn = { "start",{0,0,100,0,100,30,0,30}, "Start Game" };
-//Button pvpBtn = { "pvp",{110,0,210,0,210,30,110,30}, "PvP Mode" };
-//
-//
-//
-//void Button_Show(Button btn) {
-//    glEnableClientState(GL_VERTEX_ARRAY);
-//    glColor3f(1, 1, 0);
-//    glVertexPointer(2, GL_FLOAT, 0, btn.vert);
-//    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-//    glDisableClientState(GL_VERTEX_ARRAY);
-//
-//    // Отрисовка текста на кнопке
-//    drawText(btn.vert[0] + 10, btn.vert[1] + 20, btn.text);
-//}
-//
-//
-//void HandleButtonClick(int x, int y) {
-//    if (PointInButton(x, y, startBtn)) {
-//        inMenu = false;
-//        printf("Start button clicked\n");
-//        // Начать новую игру
-//        NewGame();
-//    }
-//    else if (PointInButton(x, y, pvpBtn)) {
-//        PvP = !PvP;
-//        printf("PvP button clicked. PvP is now %s\n", PvP ? "on" : "off");
-//    }
-//}
 
 void ShowMenu() {
     glPushMatrix();

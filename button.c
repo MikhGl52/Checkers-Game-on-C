@@ -7,12 +7,9 @@
 #include <stdio.h>  
 #include <GL\freeglut.h>
 #include "main.h"
+#include "draw.h"
+#include "button.h"
 
-typedef struct {
-    char name[20];
-    float vert[8];
-    char text[20];
-} Button;
 
 BOOL PointInButton(int x, int y, Button btn) {
     return (x > btn.vert[0]) && (x < btn.vert[4]) && (y > btn.vert[1]) && (y < btn.vert[5]);
@@ -31,7 +28,7 @@ void Button_Show(Button btn) {
     glDisableClientState(GL_VERTEX_ARRAY);
 
     // Отрисовка текста на кнопке
-    drawText(btn.vert[0] + 10, btn.vert[1] + 20, btn.text);
+    //drawText(btn.vert[0] + 10, btn.vert[1] + 20, btn.text);
 }
 
 
