@@ -118,7 +118,7 @@ int InMap(int x, int y) {
 }
 
 bool IsValidMove(int fromX, int fromY, int toX, int toY) {
-    if (field[toY][toX].checker != empty)
+    if (!InMap(toX, toY) || field[toY][toX].checker != empty)
         return false;
 
     int dx = toX - fromX;
@@ -308,6 +308,17 @@ bool GameOver(bool* winner) {
         return true;
     }
     return false;
+}
+
+int checkWin() {
+
+    if (whiteAmount == 0) 
+        return black;
+    
+    else if (blackAmount == 0)
+        return white;
+
+    return empty;
 }
 
 LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM);

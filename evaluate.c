@@ -5,6 +5,11 @@
 #include <time.h>
 #include <limits.h>
 
+/*
+whites ++
+blacks --
+*/
+
 int EvaluateMove(int fromX, int fromY, int toX, int toY, bool mustCapture) {
     int score = 0;
 
@@ -33,4 +38,51 @@ int EvaluateMove(int fromX, int fromY, int toX, int toY, bool mustCapture) {
 }
 
 
+int evaluatePosition(Tcell field[numRows][numCols]) {
+    int winner = checkWin();
+    int score = 0;
 
+    if (winner != empty) 
+        return (winner == white) ? INT_MAX : INT_MIN;
+    
+
+    for (int i = 0; i < numRows; i++) {
+        for (int j = 0; j < numCols; j++) {
+            Tcell cell = field[i][j];
+
+            if (cell.checker == empty) continue;
+
+
+            if (cell.checker == white) {
+                if (cell.queen == true) {
+                    if (i == j)
+                        score += 15;
+                    else
+                        score += 10;
+                }
+                if (cell.queen == false)
+                    score += 1;
+                if (WouldBeUnderThreat(j, i))
+                    score -= 5;
+                if (OpponentUnderThreat(j, i))
+                    score += 5;
+            }
+
+            if (cell.checker == black) {
+                if (cell.queen == true) {
+                    if (i == j)
+                        score -= 15;
+                    else
+                        score -= 10;
+                }
+                if (cell.queen == false)
+                    score -= 1;
+                if (WouldBeUnderThreat(j, i))
+                    score += 5;
+                if (OpponentUnderThreat(j, i))
+                    score -= 5;
+            }
+        }
+    }
+    return score;
+}

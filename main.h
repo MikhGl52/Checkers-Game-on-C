@@ -46,6 +46,7 @@ bool HasValidCaptures();
 bool MoveChecker(int fromX, int fromY, int toX, int toY);
 bool HasValidCapturesFrom(int x, int y);
 bool GameOver();
+int checkWin();
 
 //bool OpponentUnderThreat(int x, int y);
 

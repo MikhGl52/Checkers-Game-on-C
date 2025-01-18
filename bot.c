@@ -2,17 +2,168 @@
 #include "main.h"
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 #include <limits.h>
 #include "evaluate.h"
 
 #define MAX_MOVES 100 // Максимальное количество возможных ходов
 #define MAX_DEPTH 5
 
+/*
+whites ++
+blacks --
+*/
 
-typedef struct {
-    int fromX, fromY;
-    int toX, toY;
-} Move;
+bool hasAvailableMoves(Tcell field[numRows][numCols], bool isMaximizing) {
+    for (int fromY = 0; fromY < numRows; fromY++) {
+        for (int fromX = 0; fromX < numCols; fromX++) {
+            if (field[fromY][fromX].checker == (isMaximizing ? white : black)) {
+                for (int toY = 0; toY < numRows; toY++) {
+                    for (int toX = 0; toX < numCols; toX++) {
+                        if (IsValidMove(fromX, fromY, toX, toY) || IsValidCapture(fromX, fromY, toX, toY)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+MoveState simulateMove(int fromX, int fromY, int toX, int toY) {
+    MoveState moveState = {
+        .fromX = fromX,
+        .fromY = fromY,
+        .toX = toX,
+        .toY = toY,
+        .captured = false,
+        .capturedX = -1,
+        .capturedY = -1,
+        .prevChecker = field[fromY][fromX].checker,
+        .prevQueen = field[fromY][fromX].queen,
+        .capturedChecker = empty,
+        .becameQueen = false
+    };
+
+    // Перемещение шашки
+    int movingChecker = field[fromY][fromX].checker;
+    bool movingQueen = field[fromY][fromX].queen;
+    field[toY][toX].checker = movingChecker;
+    field[toY][toX].queen = movingQueen;
+    field[fromY][fromX].checker = empty;
+    field[fromY][fromX].queen = false;
+
+    // Проверка на захват
+    int dx = toX - fromX;
+    int dy = toY - fromY;
+
+    if (!movingQueen && abs(dx) == 2 && abs(dy) == 2) {
+        // Захват для обычной шашки
+        int middleX = fromX + dx / 2;
+        int middleY = fromY + dy / 2;
+        moveState.captured = true;
+        moveState.capturedX = middleX;
+        moveState.capturedY = middleY;
+        moveState.capturedChecker = field[middleY][middleX].checker;
+        field[middleY][middleX].checker = empty;
+    }
+    else if (movingQueen && abs(dx) == abs(dy)) {
+        // Захват для дамки
+        int steps = abs(dx);
+        for (int i = 1; i < steps; i++) {
+            int currentX = fromX + i * (dx / steps);
+            int currentY = fromY + i * (dy / steps);
+            if (field[currentY][currentX].checker != empty) {
+                moveState.captured = true;
+                moveState.capturedX = currentX;
+                moveState.capturedY = currentY;
+                moveState.capturedChecker = field[currentY][currentX].checker;
+                field[currentY][currentX].checker = empty;
+                break;
+            }
+        }
+    }
+
+    // Преобразование в дамку
+    if ((movingChecker == white && toY == numRows - 1) ||
+        (movingChecker == black && toY == 0)) {
+        if (!movingQueen) {
+            moveState.becameQueen = true;
+            field[toY][toX].queen = true;
+        }
+    }
+
+    return moveState;
+}
+
+void undoMove(const MoveState& moveState) {
+    // Восстановление шашки на начальную позицию
+    field[moveState.fromY][moveState.fromX].checker = moveState.prevChecker;
+    field[moveState.fromY][moveState.fromX].queen = moveState.prevQueen;
+
+    // Очистка конечной позиции
+    field[moveState.toY][moveState.toX].checker = empty;
+    field[moveState.toY][moveState.toX].queen = false;
+
+    // Восстановление захваченной шашки (если был захват)
+    if (moveState.captured) {
+        field[moveState.capturedY][moveState.capturedX].checker = moveState.capturedChecker;
+    }
+
+    // Удаление дамки, если шашка стала дамкой после хода
+    if (moveState.becameQueen) {
+        field[moveState.fromY][moveState.fromX].queen = false;
+    }
+}
+
+
+
+int minimax(Tcell field[numRows][numCols], int depth, bool isMaximizing) {
+
+    int score = evaluatePosition(field);
+
+    if (depth == MAX_DEPTH || score == INT_MIN || score == INT_MAX)
+        return score;
+
+    bool isMovesAvailable = hasAvailableMoves(field, isMaximizing);
+    if (!isMovesAvailable)
+        return evaluatePosition(field); // Если ходов нет, возвращаем оценку позиции
+
+    int best = isMaximizing ? INT_MIN : INT_MAX;
+
+    for (int fromY = 0; fromY < numRows; fromY++) {
+        for (int fromX = 0; fromX < numCols; fromX++) {
+            if (field[fromY][fromX].checker == (isMaximizing ? white : black)) {
+                for (int toY = 0; toY < numRows; toY++) {
+                    for (int toX = 0; toX < numCols; toX++) {
+                        if (IsValidMove(fromX, fromY, toX, toY) || IsValidCapture(fromX, fromY, toX, toY)) {
+                            Tcell tempFrom = field[fromY][fromX];
+                            Tcell tempTo = field[toY][toX];
+
+                            simulateMove(fromX, fromY, toX, toY);
+
+                            int currentScore = minimax(field, depth + 1, !isMaximizing);
+
+                            if (isMaximizing) 
+                                best = max(best, currentScore);
+                            
+                            else 
+                                best = min(best, currentScore);
+                            
+
+                            // Откат изменений
+                            field[fromY][fromX] = tempFrom;
+                            field[toY][toX] = tempTo;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return best;
+}
 
 
 void makeRandomMove(int best) {
