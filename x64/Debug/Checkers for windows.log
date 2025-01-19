@@ -1,4 +1,7 @@
-﻿  main.c
+﻿  bot.c
+  main.c
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(71,25): warning C4098: simulateMove: функция типа "void", возвращающая значение
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\bot.c(257,9): warning C4101: score: неиспользованная локальная переменная
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: APIENTRY: изменение макроопределения
   (компиляция исходного файла "main.c")
       C:\Users\mishk\Documents\Visual Studio 2022\libraries\glfw-3.4.bin.WIN64\include\GLFW\glfw3.h(123,11):
@@ -12,9 +15,10 @@ C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(340
 C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(367,24): warning C4133: =: несовместимые типы - из "char [9]" в "LPCWSTR"
 C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(376,9): warning C4133: функция: несовместимые типы - из "char [9]" в "LPCWSTR"
 C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(377,9): warning C4133: функция: несовместимые типы - из "char [1]" в "LPCWSTR"
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(470,34): warning C4047: функция: "bool *" отличается по уровням косвенного обращения от "bool"
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(470,34): warning C4024: GameOver: различные типы для формального и фактического параметров 1
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(488,15): warning C4244: return: преобразование "WPARAM" в "int", возможна потеря данных
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(561,34): warning C4047: функция: "bool *" отличается по уровням косвенного обращения от "bool"
-C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(561,34): warning C4024: GameOver: различные типы для формального и фактического параметров 1
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(477,34): warning C4047: функция: "bool *" отличается по уровням косвенного обращения от "bool"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(477,34): warning C4024: GameOver: различные типы для формального и фактического параметров 1
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(495,15): warning C4244: return: преобразование "WPARAM" в "int", возможна потеря данных
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(568,34): warning C4047: функция: "bool *" отличается по уровням косвенного обращения от "bool"
+C:\Users\mishk\source\repos\Checkers for windows\Checkers for windows\main.c(568,34): warning C4024: GameOver: различные типы для формального и фактического параметров 1
+  Создание кода...
   Checkers for windows.vcxproj -> C:\Users\mishk\source\repos\Checkers for windows\x64\Debug\Checkers for windows.exe

@@ -163,7 +163,7 @@ int minimax(Tcell field[numRows][numCols], int depth, bool isMaximizing) {
 }
 
 void findBestMove(Tcell field[numRows][numCols], int* bestFromX, int* bestFromY, int* bestToX, int* bestToY, int currentPlayer,int* maximum) {
-    printField(field);
+    
     int bestValue = (currentPlayer == white) ? INT_MIN : INT_MAX;
 
     *bestFromX = -1;

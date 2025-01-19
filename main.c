@@ -443,8 +443,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
                     int bestToY;
                     int maxScore = 0;
 
+                    double time_spent = 0.0;
+                    clock_t begin = clock();
+
                     // Находим лучший ход
                     findBestMove(field, &bestFromX, &bestFromY, &bestToX, &bestToY, black, &maxScore);
+                    clock_t end = clock();
+                    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+                    printf("Time of searching best move is %f seconds\n ",time_spent);
                     printf("BestMove: from %d %d to %d %d with priority %d\n", bestFromX, bestFromY, bestToX, bestToY, maxScore);
 
                     // Делаем ход
@@ -457,6 +463,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
                         // Находим лучший ход из текущей позиции
                         findBestMove(field, &bestFromX, &bestFromY, &bestToX, &bestToY, black, &maxScore);
+
                         printf("Chained Move: from %d %d to %d %d with priority %d\n", bestFromX, bestFromY, bestToX, bestToY, maxScore);
 
                         // Делаем ход
