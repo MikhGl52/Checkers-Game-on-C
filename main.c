@@ -187,6 +187,17 @@ bool IsValidCapture(int fromX, int fromY, int toX, int toY) {
     return false;
 }
 
+bool hasFurtherCaptures(Tcell field[numRows][numCols], int fromX, int fromY) {
+    for (int toY = 0; toY < numRows; toY++) {
+        for (int toX = 0; toX < numCols; toX++) {
+            if (IsValidCapture(fromX, fromY, toX, toY)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 
 bool HasValidCaptures() {
     for (int i = 0; i < numRows; i++) {
@@ -424,15 +435,44 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
             glPopMatrix();
             SwapBuffers(hDC);
 
-            if (!PvP && !inMenu) {
+            if (!PvP && !inMenu) { //BOT MOVEMENT
                 if (player == black) {
-                    MakeBotMove();
+                    int bestFromX;
+                    int bestFromY;
+                    int bestToX;
+                    int bestToY;
+                    int maxScore = 0;
+
+                    // Находим лучший ход
+                    findBestMove(field, &bestFromX, &bestFromY, &bestToX, &bestToY, black, &maxScore);
+                    printf("BestMove: from %d %d to %d %d with priority %d\n", bestFromX, bestFromY, bestToX, bestToY, maxScore);
+
+                    // Делаем ход
+                    bool captured = MoveChecker(bestFromX, bestFromY, bestToX, bestToY);
+
+                    // Пока доступны захваты, продолжать ходить
+                    while (hasFurtherCaptures(field, bestToX, bestToY) && captured) {
+                        bestFromX = bestToX;
+                        bestFromY = bestToY;
+
+                        // Находим лучший ход из текущей позиции
+                        findBestMove(field, &bestFromX, &bestFromY, &bestToX, &bestToY, black, &maxScore);
+                        printf("Chained Move: from %d %d to %d %d with priority %d\n", bestFromX, bestFromY, bestToX, bestToY, maxScore);
+
+                        // Делаем ход
+                        MoveChecker(bestFromX, bestFromY, bestToX, bestToY);
+                    }
+
+                    // Меняем игрока
                     player = white;
+
+                    // Проверяем окончание игры
                     if (GameOver(winner)) {
                         drawWinScreen();
                         Sleep(2);
                     }
                 }
+
             }
         }
     }

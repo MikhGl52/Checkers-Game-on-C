@@ -64,7 +64,7 @@ int evaluatePosition(Tcell field[numRows][numCols]) {
                     score += 1;
                 if (WouldBeUnderThreat(j, i))
                     score -= 5;
-                if (OpponentUnderThreat(j, i))
+                if (OpponentUnderThreat(j, i) && !WouldBeUnderThreat(j, i))
                     score += 5;
             }
 
@@ -79,7 +79,7 @@ int evaluatePosition(Tcell field[numRows][numCols]) {
                     score -= 1;
                 if (WouldBeUnderThreat(j, i))
                     score += 5;
-                if (OpponentUnderThreat(j, i))
+                if (OpponentUnderThreat(j, i) && !WouldBeUnderThreat(j, i))
                     score -= 5;
             }
         }
