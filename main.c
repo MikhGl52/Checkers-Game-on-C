@@ -29,7 +29,8 @@ float cellSize = 1.0f / numRows;
 
 
 Tcell field[numRows][numCols];
-int player = white;
+int player = white; //Чья очередь ходить
+int bot = black; //За кого играет бот
 POINT selectedChecker = { -1, -1 };
 bool isCheckerSelected = false;
 bool possibleToChange = true;
@@ -436,7 +437,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
             SwapBuffers(hDC);
 
             if (!PvP && !inMenu) { //BOT MOVEMENT
-                if (player == black) {
+                if (player == bot) {
                     int bestFromX;
                     int bestFromY;
                     int bestToX;
@@ -450,8 +451,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
                     findBestMove(field, &bestFromX, &bestFromY, &bestToX, &bestToY, black, &maxScore);
                     clock_t end = clock();
                     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-                    printf("Time of searching best move is %f seconds\n ",time_spent);
-                    printf("BestMove: from %d %d to %d %d with priority %d\n", bestFromX, bestFromY, bestToX, bestToY, maxScore);
+                    //printf("Time of searching best move is %f seconds\n ",time_spent);
+                    printf("Best move: from %d %d to %d %d with priority %d\n", bestFromX, bestFromY, bestToX, bestToY, maxScore);
 
                     // Делаем ход
                     bool captured = MoveChecker(bestFromX, bestFromY, bestToX, bestToY);
@@ -471,7 +472,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
                     }
 
                     // Меняем игрока
-                    player = white;
+                    player = (player == white) ? black : white;
 
                     // Проверяем окончание игры
                     if (GameOver(winner)) {

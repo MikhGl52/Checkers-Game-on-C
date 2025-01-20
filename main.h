@@ -31,6 +31,7 @@ extern Tcell field[numRows][numCols];
 extern bool PvP;
 extern bool inMenu;
 extern int player;
+extern int bot;
 extern int whiteAmount;
 extern int blackAmount;
 extern bool isCheckerSelected;
