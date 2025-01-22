@@ -6,7 +6,7 @@
 #include <time.h>
 #include <math.h>
 #include <stdlib.h>
-#include <stdio.h>  
+#include <stdio.h>
 #include <GL\freeglut.h>
 #include "bot.h"
 #include "draw.h"
@@ -593,9 +593,11 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
         ScreenToOpenGL(hwnd, LOWORD(lParam), HIWORD(lParam), &pf.x, &pf.y);
         int x = (int)pf.x;
         int y = (int)pf.y;
+        system("cls");
         NewGame();
     }
-                       break;
+    break;
+
 
     case WM_DESTROY:
         PostQuitMessage(0);

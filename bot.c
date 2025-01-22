@@ -162,6 +162,63 @@ int minimax(Tcell field[numRows][numCols], int depth, bool isMaximizing) {
     return best;
 }
 
+int alphaBetta(Tcell field[numRows][numCols], int depth, bool isMaximizing, int alpha, int betta) {
+
+    int score = evaluatePosition(field);
+
+    if (depth == MAX_DEPTH || score == INT_MIN || score == INT_MAX)
+        return score;
+
+    bool isMovesAvailable = hasAvailableMoves(field, isMaximizing);
+    if (!isMovesAvailable)
+        return evaluatePosition(field); // Если ходов нет, возвращаем оценку позиции
+
+    int best = isMaximizing ? INT_MIN : INT_MAX;
+
+    for (int fromY = 0; fromY < numRows; fromY++) {
+        for (int fromX = 0; fromX < numCols; fromX++) {
+            if (field[fromY][fromX].checker != empty &&
+                field[fromY][fromX].checker == (isMaximizing ? white : black)) {
+                for (int toY = 0; toY < numRows; toY++) {
+                    for (int toX = 0; toX < numCols; toX++) {
+                        if (IsValidMove(fromX, fromY, toX, toY) || IsValidCapture(fromX, fromY, toX, toY)) {
+                            Tcell tmpField[numRows][numCols];
+
+                            copyField(tmpField, field);
+
+                            simulateMove(fromX, fromY, toX, toY);
+
+                            int currentScore = alphaBetta(field, depth + 1, !isMaximizing, alpha, betta);
+
+
+                            if (isMaximizing) {
+                                best = max(best, currentScore);
+                                alpha = max(alpha, best);
+                            }
+                            else {
+                                best = min(best, currentScore);
+                                betta = min(betta, best);
+                            }
+
+
+                            // Откат изменений
+                            copyField(field, tmpField);
+
+                            if (betta <= alpha)
+                                return best;
+
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return best;
+}
+
+
 void findBestMove(Tcell field[numRows][numCols], int* bestFromX, int* bestFromY, int* bestToX, int* bestToY, int currentPlayer,int* maximum) {
     
     int bestValue = (currentPlayer == white) ? INT_MIN : INT_MAX;
@@ -190,10 +247,10 @@ void findBestMove(Tcell field[numRows][numCols], int* bestFromX, int* bestFromY,
                             simulateMove(fromX, fromY, toX, toY);
 
 
-                            int moveValue = minimax(field, 0, currentPlayer == black);
+                            int moveValue = alphaBetta(field, 0, currentPlayer == black, INT_MIN, INT_MAX);
 
 
-                            // Откат изменений
+
                             copyField(field, tmpField);
 
                             //printf("After rollback:\n");

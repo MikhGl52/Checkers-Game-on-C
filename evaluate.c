@@ -39,6 +39,7 @@ int EvaluateMove(int fromX, int fromY, int toX, int toY, bool mustCapture) {
 
 
 int evaluatePosition(Tcell field[numRows][numCols]) {
+    printf("---------------------------------\n");
     int winner = checkWin();
     int score = 0;
 
@@ -84,5 +85,6 @@ int evaluatePosition(Tcell field[numRows][numCols]) {
             }
         }
     }
+    printf("%d\n", score);
     return score;
 }
