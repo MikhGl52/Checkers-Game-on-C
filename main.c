@@ -588,6 +588,15 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
         }
     } break;
 
+    case WM_RBUTTONDOWN: {
+        POINTFLOAT pf;
+        ScreenToOpenGL(hwnd, LOWORD(lParam), HIWORD(lParam), &pf.x, &pf.y);
+        int x = (int)pf.x;
+        int y = (int)pf.y;
+        NewGame();
+    }
+                       break;
+
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
