@@ -1,5 +1,5 @@
 
-During the work on the project "Checkers on C", an alpha optimization of the minimax algorithm was done.
+During the work on the project "Checkers on C", an alpha optimization of the minimax algorithm was done..
 
 |    :rocket:  (T,s)    |    **debute**   | **mittelspiel** | **endspiel**   |
 |---------------|-------------|-------------|-------------|
